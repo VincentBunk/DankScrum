@@ -7,7 +7,7 @@ mysql:
 fpm:
   image: zetaron/laravel-php
   volumes:
-    - ./api:/var/www/html
+    - ./scrum:/var/www/html
   links:
     - mysql
   env_file:
@@ -15,7 +15,7 @@ fpm:
 web:
   image: zetaron/laravel-web
   volumes:
-    - ./api:/var/www/html:ro
+    - ./scrum:/var/www/html:ro
   links:
     - fpm
   ports:
@@ -25,7 +25,7 @@ web:
 composer:
   image: composer/composer
   volumes:
-    - ./api:/app
+    - ./scrum:/app
   env_file:
     - ./environment.env
   command: install
