@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -26,6 +22,28 @@ Route::get('/', function () {
 |
 */
 
+//	Route::get('/', function () {
+//		return view('welcome');
+//	});
+
 Route::group(['middleware' => ['web']], function () {
-    //
+
+	Route::get('/', function () {
+		return view('welcome');
+	})->middleware('auth');
+
+	Route::get('/projects', 'ProjectController@index');
+    Route::get('/project/{project}', 'ProjectController@view');
+	Route::get('/project/edit/{project}', 'ProjectController@edit');
+    Route::post('/project/update/{project}', 'ProjectController@update');
+    Route::post('/project', 'ProjectController@create');
+    Route::delete('/project/{project}', 'ProjectController@delete');
+
+	Route::get('/tickets', 'TicketController@index');
+	Route::get('/ticket/{ticket}', 'TicketController@index');
+	Route::post('/ticket', 'TicketController@create');
+	Route::delete('/ticket/{ticket}', 'TicketController@delete');
+
+
+	Route::auth();
 });

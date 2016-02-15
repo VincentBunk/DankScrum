@@ -23,4 +23,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+	/**
+	 * Get all tickets of the user.
+	 */
+	public function tickets()
+	{
+		return $this->hasMany(Ticket::class);
+	}
+
+	/**
+	 * Get all projects of the user.
+	 */
+	public function projects()
+	{
+		return $this->hasMany(Project::class);
+	}
 }

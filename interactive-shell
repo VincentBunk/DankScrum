@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker run -ti --rm --env-file=./environment.env --volumes-from server_fpm_1 --link server_mysql_1:mysql zetaron/laravel-php bash
+docker run -ti --rm --env-file=./environment.env --volumes-from dankscrum_fpm_1 --link dankscrum_mysql_1:mysql zetaron/laravel-php bash
