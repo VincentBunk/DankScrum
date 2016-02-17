@@ -25,7 +25,7 @@ class CreateTicketsTable extends Migration
 	        $table->timestamp('end');
 	        $table->integer('user_id')->index();
 	        $table->integer('creator_id')->unsigned();
-	        $table->integer('project_id')->index();
+	        $table->integer('project_id')->unsigned();
 	        $table->integer('comments_id')->unsigned();
             $table->timestamps();
         });

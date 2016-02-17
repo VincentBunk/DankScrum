@@ -32,6 +32,10 @@ Route::group(['middleware' => ['web']], function () {
 		return view('welcome');
 	})->middleware('auth');
 
+    Route::get('/admin', 'AdminController@index');
+    Route::get('/admin/attributes', 'AdminController@view');
+    Route::post('/admin/attributes', 'AdminController@addOption');
+
 	Route::get('/projects', 'ProjectController@index');
     Route::get('/project/{project}', 'ProjectController@view');
 	Route::get('/project/edit/{project}', 'ProjectController@edit');
@@ -39,8 +43,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/project', 'ProjectController@create');
     Route::delete('/project/{project}', 'ProjectController@delete');
 
-	Route::get('/tickets', 'TicketController@index');
-	Route::get('/ticket/{ticket}', 'TicketController@index');
+	//Route::get('/tickets', 'TicketController@index');
+    Route::get('/tickets/{project}', 'TicketController@index');
+	Route::get('/ticket/{ticket}', 'TicketController@view');
+    Route::get('/ticket/new/{project}', 'TicketController@newAction');
 	Route::post('/ticket', 'TicketController@create');
 	Route::delete('/ticket/{ticket}', 'TicketController@delete');
 

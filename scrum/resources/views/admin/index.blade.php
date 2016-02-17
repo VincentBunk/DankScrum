@@ -21,7 +21,7 @@
 							<label for="project-title" class="col-sm-3 control-label">Project</label>
 
 							<div class="col-sm-6">
-								<input type="text" name="title" id="project-name" class="form-control" value="{{ old('project') }}">
+								<input type="text" name="title" id="project-name" class="form-control" value="">
 							</div>
 						</div>
 

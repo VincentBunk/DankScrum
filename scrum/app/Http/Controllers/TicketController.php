@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Project;
 use App\Ticket;
+use DB;
+use App\Repositories\ProjectRepository;
 use App\Repositories\TicketRepository;
 
 class TicketController extends Controller
@@ -18,6 +21,13 @@ class TicketController extends Controller
 	 * @var TicketRepository
 	 */
 	protected $tickets;
+
+    /**
+     * The project repository instance.
+     *
+     * @var ProjectRepository
+     */
+    protected $projects;
 
 	/**
 	 * Create a new controller instance.
@@ -35,15 +45,46 @@ class TicketController extends Controller
 	/**
 	 * Display a list of all of the user's tickets.
 	 *
-	 * @param  Request  $request
+	 * @param  Project  $project
 	 * @return Response
 	 */
-	public function index(Request $request)
+	public function index(Project $project)
 	{
+        $tickets = $this->tickets->byProject($project);
 		return view('tickets.index', [
-			'tickets' => $this->tickets->forUser($request->user()),
+			'tickets' => $tickets,
+            'project' => $project
 		]);
 	}
+
+    /**
+     * Displays a ticket
+     *
+     * @param Ticket $ticket
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function view(Ticket $ticket)
+    {
+        return view('tickets.view', [
+            'ticket' => $ticket
+        ]);
+    }
+
+    /**
+     * Displays ticket create page
+     *
+     * @param int $project_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function newAction($project_id)
+    {
+        $status_array = DB::table('status')->get();
+        // TODO: pass attributes of select fields to view
+        return view('tickets.new', [
+            'project_id' => $project_id,
+            'statuses' => $status_array
+        ]);
+   }
 
 	/**
 	 * Create a new ticket.
@@ -55,13 +96,16 @@ class TicketController extends Controller
 	{
 		$this->validate($request, [
 			'title' => 'required|max:255',
+            'project_id' => 'required',
 		]);
 
 		$request->user()->tickets()->create([
 			'title' => $request->title,
+            'project_id' => $request->project_id,
+            'status_id' => $request->status_id
 		]);
 
-		return redirect('/tickets');
+		return redirect('/tickets/'.$request->project_id);
 	}
 
 	/**

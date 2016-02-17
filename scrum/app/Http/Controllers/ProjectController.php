@@ -64,7 +64,7 @@
          */
         public function view(Request $request)
         {
-            return view('projects.index', [
+            return view('tickets.index', [
                 'tickets' => $this->tickets->byProject($request->project()),
             ]);
         }

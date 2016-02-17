@@ -12,7 +12,7 @@ class Ticket extends Model
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['title'];
+	protected $fillable = ['title', 'project_id', 'status_id'];
 
 	/**
 	 * Get the user who created the ticket.
