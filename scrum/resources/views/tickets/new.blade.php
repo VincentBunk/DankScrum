@@ -27,13 +27,28 @@
 
 
                             <div class="col-sm-6">
-                                <label for="ticket-status" class="col-sm-3 control-label">Ticket Status</label>
+                                <label for="ticket-status" class="col-sm-3 control-label">Status</label>
 
                                 <select name="status_id" id="ticket-status">
                                     @foreach ($statuses as $status)
                                     <option value="{{ $status->id }}">{{ $status->title }}</option>
                                     @endforeach
                                 </select>
+	                            <label for="ticket-severity" class="col-sm-3 control-label">Severity</label>
+
+	                            <select name="severity_id" id="ticket-severity">
+		                            @foreach ($severities as $severity)
+		                            <option value="{{ $severity->id }}">{{ $severity->title }}</option>
+		                            @endforeach
+	                            </select>
+
+	                            <label for="ticket-type" class="col-sm-3 control-label">Type</label>
+
+	                            <select name="ticket_type_id" id="ticket-type">
+		                            @foreach ($ticket_types as $ticket_type)
+		                            <option value="{{ $ticket_type->id }}">{{ $ticket_type->title }}</option>
+		                            @endforeach
+	                            </select>
                             </div>
 						</div>
 

@@ -29,6 +29,12 @@ class CreateTicketsTable extends Migration
 	        $table->integer('comments_id')->unsigned();
             $table->timestamps();
         });
+
+	    Schema::table('tickets', function($table) {
+		    $table->foreign('status_id')->references('id')->on('status');
+		    $table->foreign('severity_id')->references('id')->on('severities');
+		    $table->foreign('ticket_type_id')->references('id')->on('ticket_types');
+	    });
     }
 
     /**

@@ -34,7 +34,9 @@
 								@foreach ($tickets as $ticket)
 									<tr>
 										<td class="table-text"><div>{{ $ticket->title }}</div></td>
-
+										<td class="table-text"><div>{{ $ticket->status->title }}</div></td>
+										<td class="table-text"><div>{{ $ticket->severity->title }}</div></td>
+										<td class="table-text"><div>{{ $ticket->ticket_type->title }}</div></td>
 										<!-- Ticket Delete Button -->
 										<td>
 											<form action="/ticket/{{ $ticket->id }}" method="POST">

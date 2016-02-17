@@ -48,6 +48,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/ticket/{ticket}', 'TicketController@view');
     Route::get('/ticket/new/{project}', 'TicketController@newAction');
 	Route::post('/ticket', 'TicketController@create');
+	Route::post('/ticket/update', 'TicketController@update');
 	Route::delete('/ticket/{ticket}', 'TicketController@delete');
 
 

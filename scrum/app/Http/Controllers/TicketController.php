@@ -79,10 +79,15 @@ class TicketController extends Controller
     public function newAction($project_id)
     {
         $status_array = DB::table('status')->get();
+        $severity_array = DB::table('severities')->get();
+        $ticket_type_array = DB::table('ticket_types')->get();
+
         // TODO: pass attributes of select fields to view
         return view('tickets.new', [
             'project_id' => $project_id,
-            'statuses' => $status_array
+            'statuses' => $status_array,
+            'severities' => $severity_array,
+            'ticket_types' => $ticket_type_array
         ]);
    }
 
@@ -97,12 +102,17 @@ class TicketController extends Controller
 		$this->validate($request, [
 			'title' => 'required|max:255',
             'project_id' => 'required',
+			'status_id' => 'required',
+			'severity_id' => 'required',
+			'ticket_type_id' => 'required'
 		]);
 
 		$request->user()->tickets()->create([
 			'title' => $request->title,
             'project_id' => $request->project_id,
-            'status_id' => $request->status_id
+            'status_id' => $request->status_id,
+            'severity_id' => $request->severity_id,
+            'ticket_type_id' => $request->ticket_type_id,
 		]);
 
 		return redirect('/tickets/'.$request->project_id);
@@ -123,7 +133,7 @@ class TicketController extends Controller
 
 		$ticket->save();
 
-		return redirect('/ticket{ticket}');
+		return redirect('/ticket/{ticket}');
 	}
 
 	/**

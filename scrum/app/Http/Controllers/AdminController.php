@@ -8,8 +8,10 @@
 	use App\Http\Controllers\Controller;
 
 	use App\Project;
+	use App\Status;
     use DB;
 	use App\Repositories\ProjectRepository;
+	use App\Repositories\StatusRepository;
 
 	class AdminController extends Controller
 	{
@@ -31,13 +33,15 @@
          * Create a new controller instance.
          *
          * @param  ProjectRepository  $projects
+         * @param  StatusRepository  $status
          * @return void
          */
-        public function __construct(ProjectRepository $projects)
+        public function __construct(ProjectRepository $projects, StatusRepository $status)
         {
             $this->middleware('auth');
 
             $this->projects = $projects;
+            $this->status = $status;
         }
 
 		/**
@@ -80,20 +84,26 @@
             ]);
 
             if ($request->has('status')) {
-                DB::table('status')->insert([
-                    'title' => $request->status
-                ]);
+	            DB::table('status')->insert([
+		            'title' => $request->status,
+		            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+		            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+	            ]);
             }
 
             if ($request->has('severity')) {
                 DB::table('severities')->insert([
-                    'title' => $request->severity
+                    'title' => $request->severity,
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                 ]);
             }
 
             if ($request->has('ticket_type')) {
                 DB::table('ticket_types')->insert([
-                    'title' => $request->ticket_type
+                    'title' => $request->ticket_type,
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                 ]);
             }
 
