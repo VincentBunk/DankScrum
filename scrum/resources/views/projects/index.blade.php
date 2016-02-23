@@ -74,6 +74,12 @@
 												</button>
 											</form>
 										</td>
+                                        <td>
+                                            <a href="/scrum/{{ $project->id }}"
+                                            <button type="submit" id="edit-project-{{ $project->id }}" class="btn btn-primary">
+                                                <i class="fa fa-btn fa-edit"></i>SCRUM
+                                            </button>
+                                        </td>
 									</tr>
 								@endforeach
 							</tbody>

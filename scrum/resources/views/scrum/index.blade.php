@@ -3,19 +3,6 @@
 @section('content')
 	<div class="container">
 		<div class="col-sm-offset-2 col-sm-8">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					New Ticket
-				</div>
-
-				<div class="panel-body">
-					<!-- Display Validation Errors -->
-					@include('common.errors')
-
-					<a href="/ticket/new/{{ $project->id }}">Create Ticket</a>
-
-				</div>
-			</div>
 
 			<!-- Current Tickets -->
 			@if (count($tickets) > 0)
@@ -40,18 +27,6 @@
 										<td class="table-text"><div>{{ $ticket->status->title }}</div></td>
 										<td class="table-text"><div>{{ $ticket->severity->title }}</div></td>
 										<td class="table-text"><div>{{ $ticket->ticket_type->title }}</div></td>
-
-										<!-- Ticket Delete Button -->
-										<td>
-											<form action="/ticket/{{ $ticket->id }}" method="POST">
-												{{ csrf_field() }}
-												{{ method_field('DELETE') }}
-
-												<button type="submit" id="delete-ticket-{{ $ticket->id }}" class="btn btn-danger">
-													<i class="fa fa-btn fa-trash"></i>Delete
-												</button>
-											</form>
-										</td>
 									</tr>
 								@endforeach
 							</tbody>

@@ -4,6 +4,9 @@ namespace App;
 
 use App\User;
 use App\Status;
+use App\Severitiy;
+use App\TicketType;
+use App\Project;
 use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
@@ -13,7 +16,7 @@ class Ticket extends Model
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['title', 'project_id', 'status_id', 'severity_id', 'ticket_type_id'];
+	protected $fillable = ['title', 'project_id', 'status_id', 'severity_id', 'ticket_type_id', 'description', 'assignee_id'];
 
 	/**
 	 * Get the user who created the ticket.

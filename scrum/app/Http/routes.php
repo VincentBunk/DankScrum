@@ -52,6 +52,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/ticket/status', 'TicketController@changeStatus');
 	Route::delete('/ticket/{ticket}', 'TicketController@delete');
 
+    Route::get('/scrum/{project}', 'ScrumController@index');
+
 
 	Route::auth();
 });

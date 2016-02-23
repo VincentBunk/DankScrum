@@ -49,6 +49,18 @@
 		                            <option value="{{ $ticket_type->id }}">{{ $ticket_type->title }}</option>
 		                            @endforeach
 	                            </select>
+
+                                <label for="ticket-description" class="col-sm-3 control-label">Desription</label>
+
+                                <textarea name="description" cols="50" rows="10">Your description</textarea>
+
+                                <label for="ticket-assignee" class="col-sm-3 control-label">Assigned to:</label>
+
+                                <select name="assignee_id" id="ticket-assignee">
+                                    @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 						</div>
 
