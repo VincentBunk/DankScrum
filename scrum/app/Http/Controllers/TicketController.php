@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 
 use App\Project;
 use App\Ticket;
+use App\Status;
+use App\Severity;
+use App\TicketType;
 use DB;
 use App\Repositories\ProjectRepository;
 use App\Repositories\TicketRepository;
@@ -65,10 +68,18 @@ class TicketController extends Controller
      */
     public function view(Ticket $ticket)
     {
+        $status_array = DB::table('status')->get();
+        $severity_array = DB::table('severities')->get();
+        $ticket_type_array = DB::table('ticket_types')->get();
+
         return view('tickets.view', [
-            'ticket' => $ticket
+            'ticket' => $ticket,
+            'statuses' => $status_array,
+            'severities' => $severity_array,
+            'ticket_types' => $ticket_type_array
         ]);
     }
+
 
     /**
      * Displays ticket create page
@@ -135,6 +146,19 @@ class TicketController extends Controller
 
 		return redirect('/ticket/{ticket}');
 	}
+
+    /**
+     * Changes the status of a ticket
+     *
+     * @param Request $request
+     * @param Ticket $ticket
+     */
+    public function changeStatus(Request $request, Ticket $ticket)
+    {
+        $this->authorize('update', $ticket);
+        $ticket->status = $request->status;
+        $ticket->save();
+    }
 
 	/**
 	 * Delete the given ticket.
