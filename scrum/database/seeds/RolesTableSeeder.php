@@ -23,5 +23,10 @@ class RolesTableSeeder extends Seeder
             'privilege_id' => 2,
         ]);
 
+	    Role::create([
+		    'title' => 'Guest',
+		    'privilege_id' => 3,
+	    ]);
+
     }
 }

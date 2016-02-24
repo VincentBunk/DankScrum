@@ -28,6 +28,24 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
-        //
+	    $gate->define('admin', function ($user) {
+		    return $user->role_id == 1;
+	    });
+
+	    $gate->define('create-project', function ($user) {
+		    return $user->role_id == 1;
+	    });
+
+	    $gate->define('create-ticket', function ($user) {
+		    return $user->role_id == 1 || $user->role_id == 2;
+	    });
+
+	    $gate->define('update', function ($user, $ticket) {
+		    return $user->role_id == 1 || $user->id === $ticket->user_id;
+	    });
+
+	    $gate->define('delete', function ($user, $ticket) {
+		    return $user->role_id == 1 || $user->id === $ticket->user_id;
+	    });
     }
 }

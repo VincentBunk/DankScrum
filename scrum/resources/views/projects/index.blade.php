@@ -3,6 +3,7 @@
 @section('content')
 	<div class="container">
 		<div class="col-sm-offset-2 col-sm-8">
+			@can('create-project')
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					New Project
@@ -13,6 +14,7 @@
 					@include('common.errors')
 
 					<!-- New Project Form -->
+
 					<form action="/project" method="POST" class="form-horizontal">
 						{{ csrf_field() }}
 
@@ -34,8 +36,10 @@
 							</div>
 						</div>
 					</form>
+
 				</div>
 			</div>
+			@endcan
 
 			<!-- Current Projects -->
 			@if (count($projects) > 0)
@@ -56,6 +60,7 @@
 										<td class="table-text"><div><a href="/tickets/{{ $project->id }}">{{ $project->title }}</a></div></td>
 
 										<!-- Project Delete Button -->
+										@can('delete', $project)
 										<td>
 											<form action="/project/{{ $project->id }}" method="POST">
 												{{ csrf_field() }}
@@ -66,6 +71,8 @@
 												</button>
 											</form>
 										</td>
+										@endcan
+										@can('update', $project)
 										<td>
 											<form action="/project/edit/{{ $project->id }}" method="GET">
                                                 {{ csrf_field() }}
@@ -74,6 +81,7 @@
 												</button>
 											</form>
 										</td>
+										@endcan
                                         <td>
                                             <a href="/scrum/{{ $project->id }}"
                                             <button type="submit" id="edit-project-{{ $project->id }}" class="btn btn-primary">

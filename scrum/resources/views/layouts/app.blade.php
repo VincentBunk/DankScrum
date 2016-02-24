@@ -40,11 +40,16 @@
 
 			<!-- Branding Image -->
 			<a class="navbar-brand" href="{{ url('/tickets') }}">
-				Ticket List
+				My Tickets
 			</a>
 			<a class="navbar-brand" href="{{ url('/projects') }}">
 				Project List
 			</a>
+			@can('admin')
+			<a class="navbar-brand" href="{{ url('/admin/attributes') }}">
+				Admin
+			</a>
+			@endcan
 		</div>
 
 		<div class="collapse navbar-collapse" id="app-navbar-collapse">

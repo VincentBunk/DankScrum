@@ -114,6 +114,8 @@ class TicketController extends Controller
 	 */
 	public function create(Request $request)
 	{
+		$this->authorize('create');
+
 		$this->validate($request, [
 			'title' => 'required|max:255',
             'project_id' => 'required',
@@ -185,7 +187,7 @@ class TicketController extends Controller
 	}
 
     /**
-     * Changes the status of a ticket
+     * Changes the status and priority of a ticket
      *
      * @param Request $request
      * @param Ticket $ticket
@@ -193,7 +195,15 @@ class TicketController extends Controller
     public function changeStatus(Request $request, Ticket $ticket)
     {
         $this->authorize('update', $ticket);
-        $ticket->status = $request->status;
+
+	    if ($request->has('status')) {
+		    $ticket->status = $request->status;
+	    }
+
+	    if ($request->has('priority')) {
+		    $ticket->priority = $request->priority;
+	    }
+
         $ticket->save();
     }
 

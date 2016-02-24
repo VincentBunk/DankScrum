@@ -28,7 +28,7 @@ class TicketsTableSeeder extends Seeder
 
         Ticket::create([
             'title' => 'Ticket 2',
-            'user_id' => 1,
+            'user_id' => 2,
             'project_id' => 1,
             'priority' => 0.4,
             'progress' => 0.4,
@@ -42,7 +42,7 @@ class TicketsTableSeeder extends Seeder
 
         Ticket::create([
             'title' => 'Ticket 3',
-            'user_id' => 1,
+            'user_id' => 2,
             'project_id' => 1,
             'priority' => 0.3,
             'progress' => 0.4,

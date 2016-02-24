@@ -3,6 +3,7 @@
 @section('content')
 	<div class="container">
 		<div class="col-sm-offset-2 col-sm-8">
+			@can('create-ticket')
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					New Ticket
@@ -16,6 +17,7 @@
 
 				</div>
 			</div>
+			@endcan
 
 			<!-- Current Tickets -->
 			@if (count($tickets) > 0)
@@ -48,6 +50,7 @@
                             <td class="table-text"><div>{{ $ticket->ticket_type->title }}</div></td>
 
                             <!-- Ticket Delete Button -->
+	                        @can('delete', $ticket)
                             <td>
                                 <form action="/ticket/{{ $ticket->id }}/{{ $project->id }}" method="POST">
                                     {{ csrf_field() }}
@@ -58,6 +61,8 @@
                                     </button>
                                 </form>
                             </td>
+	                        @endcan
+	                        @can('update', $ticket)
                             <td>
                                 <a href="/ticket/{{ $ticket->id }}">
                                     <button class="btn btn-regular">
@@ -65,6 +70,7 @@
                                     </button>
                                 </a>
                             </td>
+	                        @endcan
                         </tr>
                         @endforeach
                         </tbody>
