@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Role;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -39,4 +40,14 @@ class User extends Authenticatable
 	{
 		return $this->hasMany(Project::class);
 	}
+
+    /**
+     * Gets role assigned to user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function role()
+    {
+        return $this->hasOne(Role::class);
+    }
 }
