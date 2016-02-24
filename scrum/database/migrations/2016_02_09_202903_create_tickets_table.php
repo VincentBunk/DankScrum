@@ -18,6 +18,7 @@ class CreateTicketsTable extends Migration
 	        $table->integer('status_id')->unsigned();
 	        $table->integer('severity_id')->unsigned();
 	        $table->integer('ticket_type_id')->unsigned();
+            $table->float('priority');
 	        $table->text('description');
 	        $table->float('progress');
 	        $table->float('est_time');

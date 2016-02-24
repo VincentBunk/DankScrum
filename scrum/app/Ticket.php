@@ -39,7 +39,8 @@ class Ticket extends Model
 	 */
 	public function status()
 	{
-		return $this->hasOne('App\Status', 'id');
+		//return $this->hasMany('App\Status', 'id');
+        return $this->belongsTo(Status::class);
 	}
 
 	/**
@@ -47,7 +48,8 @@ class Ticket extends Model
 	 */
 	public function severity()
 	{
-		return $this->hasOne('App\Severity', 'id');
+		//return $this->hasMany('App\Severity', 'id');
+        return $this->belongsTo(Severity::class);
 	}
 
 	/**
@@ -55,7 +57,8 @@ class Ticket extends Model
 	 */
 	public function ticket_type()
 	{
-		return $this->hasOne('App\TicketType', 'id');
+		//return $this->hasMany('App\TicketType', 'id');
+        return $this->belongsTo(TicketType::class);
 	}
 
 

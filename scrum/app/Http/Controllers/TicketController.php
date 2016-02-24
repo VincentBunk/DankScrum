@@ -54,6 +54,8 @@ class TicketController extends Controller
 	public function index(Project $project)
 	{
         $tickets = $this->tickets->byProject($project);
+        //dd($tickets);
+        //return $tickets->first()->user;
 		return view('tickets.index', [
 			'tickets' => $tickets,
             'project' => $project
@@ -145,11 +147,41 @@ class TicketController extends Controller
 	{
 		$this->authorize('update', $ticket);
 
-		$ticket->title = "new title";
+        if ($request->has('title')) {
+		    $ticket->title = $request->title;
+        }
+
+        if ($request->has('status')) {
+            $ticket->status = $request->status;
+        }
+
+        if ($request->has('severity')) {
+            $ticket->severity = $request->severity;
+        }
+
+        if ($request->has('priority')) {
+            $ticket->priority = $request->priority;
+        }
+
+        if ($request->has('ticket_type')) {
+            $ticket->ticket_type = $request->ticket_type;
+        }
+
+        if ($request->has('description')) {
+            $ticket->description = $request->description;
+        }
+
+        if ($request->has('est_time')) {
+            $ticket->est_time = $request->est_time;
+        }
+
+        if ($request->has('progress')) {
+            $ticket->progress = $request->progress;
+        }
 
 		$ticket->save();
 
-		return redirect('/ticket/{ticket}');
+		return redirect('/ticket/'.$ticket->id);
 	}
 
     /**
@@ -168,16 +200,16 @@ class TicketController extends Controller
 	/**
 	 * Delete the given ticket.
 	 *
-	 * @param  Request  $request
 	 * @param  Ticket  $ticket
+     * @param  Project  $project
 	 * @return Response
 	 */
-	public function delete(Request $request, Ticket $ticket)
+	public function delete(Ticket $ticket, Project $project)
 	{
 		$this->authorize('delete', $ticket);
 
 		$ticket->delete();
 
-		return redirect('/tickets');
+		return redirect('/tickets/'.$project->id);
 	}
 }

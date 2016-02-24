@@ -8,6 +8,32 @@
 					{{ $ticket->title }}
 				</div>
 
+                <table class="table table-striped ticket-table">
+                    <thead>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Progress</th>
+                        <th>Estimated Time</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Severity</th>
+                        <th>Type</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="table-text"><div>{{ $ticket->title }}</div></td>
+                        <td class="table-text"><div>{{ $ticket->description }}</div></td>
+                        <td class="table-text"><div>{{ $ticket->progress }}</div></td>
+                        <td class="table-text"><div>{{ $ticket->est_time }}</div></td>
+                        <td class="table-text"><div>{{ $ticket->priority }}</div></td>
+                        <td class="table-text"><div>{{ $ticket->status->title }}</div></td>
+                        <td class="table-text"><div>{{ $ticket->severity->title }}</div></td>
+                        <td class="table-text"><div>{{ $ticket->ticket_type->title }}</div></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+
 				<div class="panel-body">
 					<!-- Display Validation Errors -->
 					@include('common.errors')
@@ -20,7 +46,7 @@
                             <label for="ticket-title" class="col-sm-3 control-label">New Ticket Title</label>
 
                             <div class="col-sm-6">
-                                <input type="text" name="title" id="ticket-title" class="form-control" value="">
+                                <input type="text" name="title" id="ticket-title" class="form-control" value="{{ $ticket->title }}">
                             </div>
 
 
@@ -47,6 +73,20 @@
                                     <option value="{{ $ticket_type->id }}">{{ $ticket_type->title }}</option>
                                     @endforeach
                                 </select>
+
+                                <label for="ticket-priority" class="col-sm-3 control-label">Priority</label>
+                                <input id="ticket-priority" name="priority" value="{{ $ticket->priority }}">
+
+                                <label for="ticket-est_time" class="col-sm-3 control-label">Estimated time</label>
+                                <input id="ticket-est_time" name="est_time" value="{{ $ticket->est_time }}">
+
+                                <label for="ticket-progress" class="col-sm-3 control-label">Progress</label>
+                                <input id="ticket-progress" name="progress" value="{{ $ticket->progress }}">
+
+                                <label for="ticket-description" class="col-sm-3 control-label">Description</label>
+
+                                <textarea name="description" cols="50" rows="10">Your description</textarea>
+
                             </div>
                         </div>
 

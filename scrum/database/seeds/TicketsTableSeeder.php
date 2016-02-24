@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Ticket;
 
 class TicketsTableSeeder extends Seeder
 {
@@ -11,40 +12,47 @@ class TicketsTableSeeder extends Seeder
      */
     public function run()
     {
-	    DB::table('tickets')->insert([
-		    'title' => 'Ticket 1',
-		    'status_id' => 1,
-		    'severity_id' => 1,
-		    'ticket_type_id' => 1,
+        Ticket::create([
+            'title' => 'Ticket 1',
+            'user_id' => 1,
             'project_id' => 1,
-		    'description' => str_random(50),
-		    'progress' => 50.0,
-		    'est_time' => 10.5,
-		    'start' => time(),
-		    'end' => time(),
-		    'user_id' => 1,
-		    'assignee_id' => 1,
-		    'comments_id' => 1,
-		    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-		    'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-	    ]);
+            'priority' => 0.5,
+            'progress' => 0.4,
+            'est_time' => 1.2,
+            'status_id' => 1,
+            'severity_id' => 1,
+            'ticket_type_id' => 1,
+            'description' => str_random(50),
+            'assignee_id' => 1,
+        ]);
 
-	    DB::table('tickets')->insert([
-		    'title' => 'Ticket 2',
-		    'status_id' => 1,
-		    'severity_id' => 1,
-		    'ticket_type_id' => 1,
+        Ticket::create([
+            'title' => 'Ticket 2',
+            'user_id' => 1,
             'project_id' => 1,
-		    'description' => str_random(50),
-		    'progress' => 10.0,
-		    'est_time' => 5.5,
-		    'start' => time(),
-		    'end' => time(),
-		    'user_id' => 1,
-		    'assignee_id' => 1,
-		    'comments_id' => 1,
-		    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-		    'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-	    ]);
+            'priority' => 0.4,
+            'progress' => 0.4,
+            'est_time' => 1.2,
+            'status_id' => 1,
+            'severity_id' => 1,
+            'ticket_type_id' => 1,
+            'description' => str_random(50),
+            'assignee_id' => 1,
+        ]);
+
+        Ticket::create([
+            'title' => 'Ticket 3',
+            'user_id' => 1,
+            'project_id' => 1,
+            'priority' => 0.3,
+            'progress' => 0.4,
+            'est_time' => 1.2,
+            'status_id' => 1,
+            'severity_id' => 1,
+            'ticket_type_id' => 1,
+            'description' => str_random(50),
+            'assignee_id' => 1,
+        ]);
+
     }
 }
