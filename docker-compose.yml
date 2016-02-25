@@ -1,0 +1,33 @@
+mysql:
+  image: mysql:5.7
+  env_file:
+    - ./environment.env
+  volumes:
+    - ./storage/mysql:/var/lib/mysql
+  ports:
+    - "3306:3306"
+fpm:
+  image: zetaron/laravel-php
+  volumes:
+    - ./scrum:/var/www/html
+  links:
+    - mysql
+  env_file:
+    - ./environment.env
+web:
+  image: zetaron/laravel-web
+  volumes:
+    - ./scrum:/var/www/html:ro
+  links:
+    - fpm
+  ports:
+    - "80:80"
+  env_file:
+    - ./environment.env
+composer:
+  image: composer/composer
+  volumes:
+    - ./scrum:/app
+  env_file:
+    - ./environment.env
+  command: install
