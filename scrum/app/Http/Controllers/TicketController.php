@@ -12,6 +12,7 @@ use App\Ticket;
 use App\Status;
 use App\Severity;
 use App\TicketType;
+use App\User;
 use DB;
 use App\Repositories\ProjectRepository;
 use App\Repositories\TicketRepository;
@@ -62,6 +63,21 @@ class TicketController extends Controller
 		]);
 	}
 
+	/**
+	 * Display a list of all of the user's tickets.
+	 *
+	 * @param  Request  $request
+	 * @return Response
+	 */
+	public function myTickets(Request $request)
+	{
+		$user = $request->user();
+		$tickets = $this->tickets->forUser($user);
+		return view('tickets.my', [
+			'tickets' => $tickets,
+		]);
+	}
+
     /**
      * Displays a ticket
      *
@@ -73,12 +89,14 @@ class TicketController extends Controller
         $status_array = DB::table('status')->get();
         $severity_array = DB::table('severities')->get();
         $ticket_type_array = DB::table('ticket_types')->get();
+	    $users_array = DB::table('users')->get();
 
         return view('tickets.view', [
             'ticket' => $ticket,
             'statuses' => $status_array,
             'severities' => $severity_array,
-            'ticket_types' => $ticket_type_array
+            'ticket_types' => $ticket_type_array,
+            'users' => $users_array
         ]);
     }
 
@@ -180,6 +198,10 @@ class TicketController extends Controller
         if ($request->has('progress')) {
             $ticket->progress = $request->progress;
         }
+
+		if ($request->has('assignee_id')) {
+			$ticket->assignee_id = $request->assignee_id;
+		}
 
 		$ticket->save();
 

@@ -18,6 +18,7 @@
                         <th>Status</th>
                         <th>Severity</th>
                         <th>Type</th>
+                        <th>Assigned to</th>
                     </thead>
                     <tbody>
                     <tr>
@@ -29,11 +30,13 @@
                         <td class="table-text"><div>{{ $ticket->status->title }}</div></td>
                         <td class="table-text"><div>{{ $ticket->severity->title }}</div></td>
                         <td class="table-text"><div>{{ $ticket->ticket_type->title }}</div></td>
+	                    <td class="table-text"><div>{{ $ticket->assignee->name }}</div></td>
 
                     </tr>
                     </tbody>
                 </table>
 
+				@can('update', $ticket)
 				<div class="panel-body">
 					<!-- Display Validation Errors -->
 					@include('common.errors')
@@ -87,6 +90,14 @@
 
                                 <textarea name="description" cols="50" rows="10">Your description</textarea>
 
+	                            <label for="ticket-assignee" class="col-sm-3 control-label">Assigned to:</label>
+
+	                            <select name="assignee_id" id="ticket-assignee">
+		                            @foreach ($users as $user)
+		                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+		                            @endforeach
+	                            </select>
+
                             </div>
                         </div>
 
@@ -101,6 +112,7 @@
                     </form>
 				</div>
 			</div>
+			@endcan
 		</div>
 	</div>
 @endsection

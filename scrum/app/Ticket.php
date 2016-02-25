@@ -61,5 +61,14 @@ class Ticket extends Model
         return $this->belongsTo(TicketType::class);
 	}
 
+	/**
+	 * Get the user record assigned to the ticket.
+	 */
+	public function assignee()
+	{
+		//return $this->hasMany('App\TicketType', 'id');
+		return $this->belongsTo(User::class);
+	}
+
 
 }

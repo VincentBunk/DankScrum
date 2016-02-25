@@ -9,7 +9,7 @@
 
 	<!-- Fonts -->
 	<link href="{{ URL::asset('css/font-awesome.min.css') }}" rel='stylesheet' type='text/css'>
-	<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
+
 
 	<!-- Styles -->
 	<link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">
@@ -17,7 +17,7 @@
 
 	<style>
 		body {
-			font-family: 'Lato';
+			font-family: 'Verdana';
 		}
 
 		.fa-btn {
@@ -39,9 +39,13 @@
 			</button>
 
 			<!-- Branding Image -->
-			<a class="navbar-brand" href="{{ url('/tickets') }}">
-				My Tickets
-			</a>
+			<form action="/tickets/my" method="POST">
+				{{ csrf_field() }}
+
+				<button type="submit" class="btn btn-danger">
+					<i class="fa fa-btn fa-trash"></i>My Tickets
+				</button>
+			</form>
 			<a class="navbar-brand" href="{{ url('/projects') }}">
 				Project List
 			</a>

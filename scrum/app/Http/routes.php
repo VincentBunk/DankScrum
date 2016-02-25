@@ -45,6 +45,7 @@ Route::group(['middleware' => ['web']], function () {
 
 	//Route::get('/tickets', 'TicketController@index');
     Route::get('/tickets/{project}', 'TicketController@index');
+	Route::post('/tickets/my', 'TicketController@myTickets');
 	Route::get('/ticket/{ticket}', 'TicketController@view');
     Route::get('/ticket/new/{project}', 'TicketController@newAction');
 	Route::post('/ticket', 'TicketController@create');

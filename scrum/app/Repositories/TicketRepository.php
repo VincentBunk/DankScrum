@@ -42,8 +42,8 @@ class TicketRepository
 	 */
 	public function forUser(User $user)
 	{
-		return Ticket::where('user_id', $user->id)
-			->orderBy('created_at', 'asc')
+		return Ticket::where('assignee_id', $user->id)
+			->orderBy('priority', 'asc')
 			->get();
 	}
 }
